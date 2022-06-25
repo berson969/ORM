@@ -97,14 +97,11 @@ else:
 for p in q.all():
     print(p.id, p.name)
 
-# Выводит издателя, у которого были проданы книги в период с 24/10 по 26/10
-# subq1 = session.query(Sale).filter(Sale.date_sale.between('2018-10-24', '2018-10-26')).subquery('data_sale_from_sale')
-subq = session.query(Stock).join(Sale).filter(Sale.date_sale.between('9:50', '9:59')).subquery('data_sale_from_sale')
+# Выводит издателя, у которого были проданы книги в период с 9:50 по 9:59
+subq = session.query(Stock).join(Sale).filter(Sale.date_sale.between('2018-10-25 9:50', '2018-10-25 9:59')).subquery('data_sale_from_sale')
 q_full = session.query(Publisher).join(Book).filter(Book.id == subq.c.id_book)
 for b in q_full.all():
     print(f"\t {b.id}   {b.name}")
-    # for p in b.id_book:
-    #     print(f"\t \t {p.id}, {p.count}")
-
+ 
 session.close()
 
