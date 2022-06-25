@@ -1,0 +1,4 @@
+env/
+orm.*
+.DS_Store
+.env
